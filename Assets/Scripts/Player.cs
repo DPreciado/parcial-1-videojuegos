@@ -80,4 +80,13 @@ public class Player : MonoBehaviour
     bool flipSprite => axis.x > 0 ? false : axis.x < 0 ? true : spr.flipX;
 
     bool IsGrounding => rb2D.IsTouching(groundFilter);
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.CompareTag("Can")){
+            Can can = other.GetComponent<Can>();
+            GameManager.instance.GetScore.AddPoints(can.Points);
+            Destroy(other.gameObject);
+            //Debug.Log(can.Points);
+        }
+    }
 }
