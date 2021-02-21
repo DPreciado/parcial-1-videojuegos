@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Can
+  - Enemy
+  - Win
   layers:
   - Default
   - TransparentFX
@@ -48,6 +50,9 @@ TagManager:
     locked: 0
   - name: Tilemap
     uniqueID: 4092360153
+    locked: 0
+  - name: Win+
+    uniqueID: 3700744235
     locked: 0
   - name: Character
     uniqueID: 1495736605
