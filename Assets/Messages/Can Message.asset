@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0894cda5ee91ad547be608ebdc0c6244, type: 3}
   m_Name: Can Message
   m_EditorClassIdentifier: 
-  message: Recolecta las latas para ganar puntos.
+  message: "Recolecta las latas de at\xFAn para ganar puntos."

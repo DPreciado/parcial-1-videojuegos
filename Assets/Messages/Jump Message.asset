@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0894cda5ee91ad547be608ebdc0c6244, type: 3}
   m_Name: Jump Message
   m_EditorClassIdentifier: 
-  message: 'Para poder moverte en el juego utilliza las teclas  A y D,  para saltar
-    la tecla Space y para correr  las teclas A o D + SHIFT.
+  message: 'Para saltar usa la tecla Space y para correr  las teclas A o D + SHIFT.
+
+    PD.
+    Existe el walljump pruebalo ;D
 
 
 '
