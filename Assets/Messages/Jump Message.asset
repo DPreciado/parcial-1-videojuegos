@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0894cda5ee91ad547be608ebdc0c6244, type: 3}
-  m_Name: Jumo Message
+  m_Name: Jump Message
   m_EditorClassIdentifier: 
-  message: 'Pra poder moverte en el juego utilliza WASD y paea saltar la tecla Space.
+  message: 'Para poder moverte en el juego utilliza WASD y para saltar la tecla Space.
 
 '
