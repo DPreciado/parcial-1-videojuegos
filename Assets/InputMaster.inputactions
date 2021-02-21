@@ -22,9 +22,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Sprint",
+                    "name": "SprintStart",
                     "type": "Button",
                     "id": "d57ef3fc-8bbf-4117-bc79-8bbc1aef11b0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SprintFinish",
+                    "type": "Button",
+                    "id": "f3cfb3d5-18b7-4354-b87e-2036315fe3a8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -222,10 +230,21 @@
                     "name": "",
                     "id": "dc0efbb2-8bf2-45ef-88d6-9bd85eb6c102",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "Teclado",
-                    "action": "Sprint",
+                    "action": "SprintStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d7438cc-7a7a-4362-9eb2-721f7446c1dc",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Teclado",
+                    "action": "SprintFinish",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

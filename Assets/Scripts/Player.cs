@@ -19,11 +19,16 @@ public class Player : MonoBehaviour
     [SerializeField, Range(0.1f, 10f)]
     float moveSpeed;
 
+    [SerializeField, Range(0.1f, 10f)]
+    float sprintSpeed;
+
     [SerializeField, Range(0.1f, 15f)]
     float jumpForce;
 
    public InputAction movimiento;
    public CharacterController controller;
+
+   public bool isSprinting;
 
     void Awake() {
         controls = new InputMaster();
@@ -31,9 +36,22 @@ public class Player : MonoBehaviour
         controls.PlayerControls.Move.performed += _ => move = _.ReadValue<Vector2>();
         controls.PlayerControls.Move.canceled += _ => move = Vector2.zero;
 
+        controls.PlayerControls.SprintStart.performed += _ => SprintPressed();
+        controls.PlayerControls.SprintFinish.performed += _ => SprintReleased();
+
         rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spr = GetComponent<SpriteRenderer>();
+    }
+
+    private void SprintPressed()
+    {
+        isSprinting = true;
+    }
+
+    private void SprintReleased()
+    {
+        isSprinting = false;
     }
 
     void OnEnable() {
@@ -62,11 +80,20 @@ public class Player : MonoBehaviour
 
     void Update()
     { 
-        transform.Translate(Vector2.right * axis.x * moveSpeed * Time.deltaTime);
-        anim.SetFloat("walk", Mathf.Abs(axis.x));
+        if(isSprinting)
+        {
+            transform.Translate(Vector2.right * axis.x * sprintSpeed * Time.deltaTime);
+            anim.SetFloat("walk", Mathf.Abs(axis.x+axis.x));
+        }
+        else
+        {
+            transform.Translate(Vector2.right * axis.x * moveSpeed * Time.deltaTime);
+            anim.SetFloat("walk", Mathf.Abs(axis.x));
+        }
         
     }  
 
+    
     void LateUpdate() {
         spr.flipX = flipSprite;
     }

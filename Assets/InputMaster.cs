@@ -35,9 +35,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Sprint"",
+                    ""name"": ""SprintStart"",
                     ""type"": ""Button"",
                     ""id"": ""d57ef3fc-8bbf-4117-bc79-8bbc1aef11b0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SprintFinish"",
+                    ""type"": ""Button"",
+                    ""id"": ""f3cfb3d5-18b7-4354-b87e-2036315fe3a8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -235,10 +243,21 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""dc0efbb2-8bf2-45ef-88d6-9bd85eb6c102"",
                     ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Teclado"",
-                    ""action"": ""Sprint"",
+                    ""action"": ""SprintStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d7438cc-7a7a-4362-9eb2-721f7446c1dc"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Teclado"",
+                    ""action"": ""SprintFinish"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -274,7 +293,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Move = m_PlayerControls.FindAction("Move", throwIfNotFound: true);
         m_PlayerControls_Jump = m_PlayerControls.FindAction("Jump", throwIfNotFound: true);
-        m_PlayerControls_Sprint = m_PlayerControls.FindAction("Sprint", throwIfNotFound: true);
+        m_PlayerControls_SprintStart = m_PlayerControls.FindAction("SprintStart", throwIfNotFound: true);
+        m_PlayerControls_SprintFinish = m_PlayerControls.FindAction("SprintFinish", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -326,14 +346,16 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private IPlayerControlsActions m_PlayerControlsActionsCallbackInterface;
     private readonly InputAction m_PlayerControls_Move;
     private readonly InputAction m_PlayerControls_Jump;
-    private readonly InputAction m_PlayerControls_Sprint;
+    private readonly InputAction m_PlayerControls_SprintStart;
+    private readonly InputAction m_PlayerControls_SprintFinish;
     public struct PlayerControlsActions
     {
         private @InputMaster m_Wrapper;
         public PlayerControlsActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PlayerControls_Move;
         public InputAction @Jump => m_Wrapper.m_PlayerControls_Jump;
-        public InputAction @Sprint => m_Wrapper.m_PlayerControls_Sprint;
+        public InputAction @SprintStart => m_Wrapper.m_PlayerControls_SprintStart;
+        public InputAction @SprintFinish => m_Wrapper.m_PlayerControls_SprintFinish;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -349,9 +371,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
-                @Sprint.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnSprint;
-                @Sprint.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnSprint;
-                @Sprint.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnSprint;
+                @SprintStart.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnSprintStart;
+                @SprintStart.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnSprintStart;
+                @SprintStart.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnSprintStart;
+                @SprintFinish.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnSprintFinish;
+                @SprintFinish.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnSprintFinish;
+                @SprintFinish.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnSprintFinish;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -362,9 +387,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Sprint.started += instance.OnSprint;
-                @Sprint.performed += instance.OnSprint;
-                @Sprint.canceled += instance.OnSprint;
+                @SprintStart.started += instance.OnSprintStart;
+                @SprintStart.performed += instance.OnSprintStart;
+                @SprintStart.canceled += instance.OnSprintStart;
+                @SprintFinish.started += instance.OnSprintFinish;
+                @SprintFinish.performed += instance.OnSprintFinish;
+                @SprintFinish.canceled += instance.OnSprintFinish;
             }
         }
     }
@@ -391,6 +419,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnSprint(InputAction.CallbackContext context);
+        void OnSprintStart(InputAction.CallbackContext context);
+        void OnSprintFinish(InputAction.CallbackContext context);
     }
 }
