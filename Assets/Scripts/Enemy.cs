@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
        anim = GetComponent<Animator>();
    }
 
-   void Update()
+     void Update()
    {
       /* transform.Translate(dir * moveSpeed * Time.deltaTime);
        timer += Time.deltaTime;
