@@ -118,6 +118,7 @@ public class Player : MonoBehaviour
         }
         if(other.gameObject.tag == "Win")
         {
+            GameManager.instance.GetScore.ResetPoints();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
     }
@@ -126,6 +127,7 @@ public class Player : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
+            GameManager.instance.GetScore.ResetPoints();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
         

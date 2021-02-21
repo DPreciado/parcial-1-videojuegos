@@ -17,4 +17,9 @@ public class Score : MonoBehaviour
         currentPoints += points;
         txtScore.text = $"<b>Score:</b><color=#ffffff>{currentPoints} pts</color>";
     }
+
+    public void ResetPoints(){
+        currentPoints = 0;
+        txtScore.text = $"<b>Score:</b><color=#ffffff>{currentPoints} pts</color>";
+    }
 }
